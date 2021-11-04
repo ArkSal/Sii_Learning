@@ -3,7 +3,7 @@ package com.asalega;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Main {
+public class Exercise_1 {
 
     static Scanner sc = new Scanner(System.in);
 
