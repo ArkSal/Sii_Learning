@@ -5,19 +5,17 @@ import java.util.Scanner;
 
 public class Exercise_1 {
 
-    static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) {
 
-        public static void main(String[] args) {
+        guessingGame();
 
-            guessingGame();
+    }
 
-        }
-
-    public static void guessingGame(){
-        System.out.println("Type range for random numbers generator." + "\n" + "First number:");
-        int firstNumber = sc.nextInt();
-        System.out.println("Type border number:");
-        int secondNumber = sc.nextInt();
+    public static void guessingGame() {
+        System.out.print("Type range for random numbers generator." + "\n" + "First number:");
+        int firstNumber = getIntegerFromScanner();
+        System.out.print("Type border number:");
+        int secondNumber = getIntegerFromScanner();
 
         int randomNumber = getRandomNumberInRange(firstNumber, secondNumber);
         String finalMessage = (guessingMethod(randomNumber)) ? "You guessed it!" : "Sorry you didn't guess the " +
@@ -25,33 +23,41 @@ public class Exercise_1 {
         System.out.println(finalMessage);
     }
 
-
-    public static boolean guessingMethod(int numberToGuess){
-        System.out.println("Please try to guess the drawn number:");
-        int numberGivenByUser = sc.nextInt();
-        for (int i = 0; i < 5; i++){
-            if(i>0){
+    private static boolean guessingMethod(int numberToGuess) {
+        System.out.print("Please try to guess the drawn number:");
+        int numberGivenByUser = getIntegerFromScanner();
+        for (int i = 0; i < 5; i++) {
+            if (i > 0) {
                 System.out.print("Type another number:");
-                numberGivenByUser = sc.nextInt();
+                numberGivenByUser = getIntegerFromScanner();
             }
-            if(numberGivenByUser == numberToGuess){
+            if (numberGivenByUser == numberToGuess) {
                 return true;
-            }
-            else if(i==4) break;
+            } else if (i == 4) break;
 
-            else if(numberGivenByUser>numberToGuess){
+            else if (numberGivenByUser > numberToGuess) {
                 System.out.println("Your number is GREATER than the one you are trying to guess");
-            }
-            else{
+            } else {
                 System.out.println("Your number is LOWER than the one you are trying to guess");
             }
-                System.out.println("Please try again, you have " + (4 - i) +  " remaining attemts");
+            System.out.println("Please try again, you have " + (4 - i) + " remaining attemts");
         }
         return false;
     }
 
-    public static int getRandomNumberInRange(int origin, int bound){
-        return new Random().nextInt(origin, bound+1);
+    private static int getRandomNumberInRange(int origin, int bound) {
+        return new Random().nextInt(origin, bound + 1);
+    }
+
+    private static int getIntegerFromScanner() {
+        Scanner sc = new Scanner(System.in);
+        while (!sc.hasNextInt()) {
+            sc.nextLine();
+            System.out.print("It's not integer, please type integer number!: ");
+        }
+        int result = sc.nextInt();
+        sc.nextLine();
+        return result;
     }
 }
 
